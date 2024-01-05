@@ -1,11 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get } from "@nestjs/common";
+import { MysqlService } from "./services/mysql/mysql.service";
 
-@Controller('app')
+@Controller("app")
 export class AppController {
-  constructor() {}
+  constructor(private readonly mysqlSvc: MysqlService) {}
 
-  @Get()
-  getHello(): string {
-    return "";
+  @Get("simplequery")
+  testSimpleQuery() {
+    this.mysqlSvc.simpleQuery();
   }
 }
