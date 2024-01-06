@@ -1,21 +1,27 @@
-<div id="table1" class="w-50">
- <h3>{{appData.view.[2].data.[0].tableName}}</h3>
+<div id="table1" class="">
+  <h3>
+    {{appData.view.2.data.0.tableName}}
+  </h3>
   <table class="table mt-5 border">
     <thead>
       <tr>
-      {{#each appData.view.[2].data.[1].hdr}}
-        <th class="border mx-auto bg-primary" scope="col">{{this}}</th>
-      {{/each}}
+        {{#each appData.view.2.data.1.hdr}}
+          <th class="border mx-auto bg-primary" scope="col">
+            {{this}}
+          </th>
+        {{/each}}
       </tr>
     </thead>
     <tbody>
-    {{#each appData.view.[2].data.[2].row}}
-    <tr>
-      {{#each this.row_data}}
-        <td>{{this}}</td>
-      {{/each}}       
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+      {{#each appData.view.2.data.2.row}}
+        <tr>
+          {{#each this.row_data}}
+            <td>
+              {{this}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>

@@ -54,11 +54,17 @@ export interface VIEW_DATA {
   class?: any[];
   initData?: (data: any) => any;
   test?: string
+  query?: string;
 }
 
-export type REQUEST_DATA = {
+export type EVENT_DATA = {
   event: APP_EVENTS,
   id: number,
   type: string,
   index?: number
 }
+
+export const UNIGY_SQL_STRINGS = [
+  "select a.parentZoneId as ZoneCluster, a.vIPAddress, c.iPAddress,c.hostName,c.macAddress,d.haRole,d.haState from ServerCluster a, ServerClusterDeviceServerServersMap b, Device c, DeviceServer d where a.id=b.serverClusterId and b.serversId=c.deviceServerId and c.deviceServerId=d.id')",
+  ""
+]
