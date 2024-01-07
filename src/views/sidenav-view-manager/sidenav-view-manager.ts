@@ -14,12 +14,12 @@ export class SidenavViewManager {
 
   processEvent(data: EVENT_DATA) {
     this.logger.log(
-      `Entering processRequest - event: ${data.event} id: ${data.id} type: ${data.type}`,
+      `Entering processRequest - event: ${data.event} id: ${data.id} type: ${data.type} index: ${data.index}`,
     );
 
     switch (data.event) {
       case APP_EVENTS.EV_CLICK: {
-        this.pageHandler_clickEvent(data.type);
+        this.pageHandler_clickEvent(data);
         break;
       }
     }
@@ -27,16 +27,14 @@ export class SidenavViewManager {
     return this.target;
   }
 
-  pageHandler_clickEvent(type) {
+  pageHandler_clickEvent(data) {
     let path = this.appData.view[VIEW_ID.VW_SIDENAV];
-    switch (path.data[type].lbl) {
+    switch (path.data[data.type].lbl) {
+      case SIDENAV_BUTTON_LABEL.USER:
       case SIDENAV_BUTTON_LABEL.SYSTEM: {
-        path.data[0].caret?path.data[0].caret=false:path.data[0].caret=true;
-        path.data[0].class === "bi-caret-right" ? path.data[0].class = "bi-caret-down" : path.data[0].class = "bi-caret-right";
+        path.data[data.type].caret?path.data[data.type].caret=false:path.data[data.type].caret=true;
+        path.data[data.type].class === "bi-caret-right" ? path.data[data.type].class = "bi-caret-down" : path.data[data.type].class = "bi-caret-right";
         this.target = path.renderFile;
-        break;
-      }
-      case SIDENAV_BUTTON_LABEL.USER: {
         break;
       }
     }
