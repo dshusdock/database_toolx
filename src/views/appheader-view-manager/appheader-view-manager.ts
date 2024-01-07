@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { AppData } from "src/models/app-data/app-data";
+import { HDR_BUTTON_LABEL } from "src/models/button-data";
 import { APP_EVENTS, EVENT_DATA } from "src/models/constants";
-import { HDR_BUTTON_LABEL, VIEW_ID } from "src/models/view-object-defintions";
+import { VIEW_ID } from "src/models/view-object-defintions";
 import { AppLogger } from "src/utils/logger/app-logger";
 
 @Injectable()

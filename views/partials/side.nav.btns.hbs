@@ -1,22 +1,25 @@
 
-<ul class="mt-5">
+<ul style="list-style-type: none; padding-left: 0" class="mt-5">
 {{#each appData.view.[3].data}}
 <div class="me-2">
   <li
     style="height: 40px"
-    class="text-bg-primary border border-secondary-subtle text-center"
+    class="d-flex flex-row justify-content-between text-bg-primary border border-secondary-subtle text-start caret_icon"
     aria-expanded="false"
-    hx-get="{{../appData.view.[1].htmx.[0].url}}{{@index}}"
+    hx-get="{{../appData.view.[3].htmx.[0].url}}{{@index}}"
     hx-swap="innerHTML"
     hx-trigger="click"
-    hx-target="#main-view"
+    hx-target="#side_nav_btns"
   >
-    <p class="mt-1">{{ this.lbl }}</p>
+    <p class="mt-1 ms-2">{{ this.lbl }}</p>
+     <i class="{{this.class}} me-2 mt-2"></i>
   </li>
 </div>
 {{#if this.caret}}
-<ul>
-    <li>This is a test</li>
+<ul style="list-style-type: none; padding-left: 0;" class="">
+  {{#each this.subLbl}}
+    {{> side.nav.subbtns}}
+  {{/each}} 
 </ul>
 {{/if}}
 {{/each}}

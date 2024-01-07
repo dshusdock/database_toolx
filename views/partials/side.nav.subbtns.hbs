@@ -1,0 +1,16 @@
+
+<div class="me-2">
+  <li
+    style="height: 40px"
+    class="d-flex flex-row justify-content-between text-bg-primary border border-secondary-subtle text-start caret_icon"
+    aria-expanded="false"
+    hx-get="{{../appData.view.[1].htmx.[0].url}}{{@index}}"
+    hx-swap="innerHTML"
+    hx-trigger="click"
+    hx-target="#main-view"
+  >
+    <p style="font-size: 14px;"  class="mt-1 ms-4">{{ this.lbl }}</p>
+  </li>
+</div>
+
+    

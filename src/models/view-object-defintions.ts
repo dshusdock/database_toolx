@@ -1,4 +1,5 @@
 import { VIEW_DATA } from "./constants";
+import { HDR_BUTTON_LABEL, SIDENAV_BUTTON_LABEL, SYSTEM_SUB_BUTTON_LABEL } from "./button-data";
 
 export const enum VIEW_ID {
   VW_INDEX,
@@ -10,29 +11,8 @@ export const enum VIEW_ID {
 
 }
 
-export const enum HDR_BUTTON_LABEL {
-  HOME = "Home",
-  QUERY = "Query",
-  AUDIT = "Audit",
-  LOAD_DB = "Load DB",
-  DB_QUERIES = "DB Queries",
-  TABLE_MAPPER = "Table Mapper",
-  LOGOUT = "Logout"
-}
-
-export const enum SIDENAV_BUTTON_LABEL {
-  SYSTEM = "System",
-  USER = "User",
-  RECORDING = "Recording",
-  BUTTON = "Button",
-  RESOURCE_AOR = "Resource AOR",
-  OPEN_CONNECTION = "Open Connection",
-  LINE = "Line",
-  ZONE = "Zone"
-}
-
 export const view_object_definitions: VIEW_DATA[] = [
-  //////////////// 1 ////////////////
+  //////////////// 0 ////////////////
   {
     id: VIEW_ID.VW_INDEX,
     renderFile: "index",
@@ -41,7 +21,7 @@ export const view_object_definitions: VIEW_DATA[] = [
     test: "this"
 
   },
-  //////////////// 2 ////////////////
+  //////////////// 1 ////////////////
   {
     id: VIEW_ID.VW_APPHEADER,
     renderFile: "partials/app.header",
@@ -61,7 +41,7 @@ export const view_object_definitions: VIEW_DATA[] = [
     test: "this"
 
   },
-  //////////////// 3 ////////////////
+  //////////////// 2 ////////////////
   {
     id: VIEW_ID.VW_TABLETEST,
     renderFile: "partials/table",
@@ -77,12 +57,29 @@ export const view_object_definitions: VIEW_DATA[] = [
     test: "this"
 
   },
+  //////////////// 3 ////////////////
   {
     id: VIEW_ID.VW_SIDENAV,
     renderFile: "partials/sidenav",
     viewFlags: [false, false],
     data: [
-      { lbl: SIDENAV_BUTTON_LABEL.SYSTEM, caret: true},
+      { 
+        lbl: SIDENAV_BUTTON_LABEL.SYSTEM, 
+        caret: false,
+        class: "bi-caret-right",
+        subLbl: [
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.ENTERPISE_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.ZONE_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.CCM_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.MEDIA_MGR_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.MEDIA_GWY_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.DEVICE_ZONE_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.IQMAX_TURRET_INVENTORY},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.TURRET_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.JOB_DETAILS_INFO},
+          {lbl: SYSTEM_SUB_BUTTON_LABEL.CDI_COUNTS},
+        ]
+      },
       { lbl: SIDENAV_BUTTON_LABEL.USER },
       { lbl: SIDENAV_BUTTON_LABEL.RECORDING },
       { lbl: SIDENAV_BUTTON_LABEL.BUTTON },
