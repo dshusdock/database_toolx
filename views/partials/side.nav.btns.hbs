@@ -1,10 +1,10 @@
 
 <ul style="list-style-type: none; padding-left: 0" class="mt-5">
 {{#each appData.view.[3].data}}
-<div class="me-2">
+<div class="me-2 side_item">
   <li
     style="height: 40px"
-    class="d-flex flex-row justify-content-between text-bg-primary border border-secondary-subtle text-start caret_icon"
+    class="d-flex flex-row justify-content-between text-start caret_icon "
     aria-expanded="false"
     hx-get="{{../appData.view.[3].htmx.[0].url}}{{@index}}"
     hx-swap="innerHTML"

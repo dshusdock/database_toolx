@@ -1,7 +1,8 @@
 .caret_icon:hover {
     cursor: pointer;
+    background-color:cornflowerblue
 }
 
 .side_item:hover {
-    background-color: rgba(169, 169, 169, 0.438);
+    background-color:cornflowerblue
 }
