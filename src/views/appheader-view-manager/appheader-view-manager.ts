@@ -12,14 +12,14 @@ export class AppheaderViewManager {
 
   constructor(private appData: AppData) {}
 
-  processEvent(data: EVENT_DATA) {
+  processEvent(eventData: EVENT_DATA) {
     this.logger.log(
-      `Entering processRequest - event: ${data.event} id: ${data.id} type: ${data.type}`,
+      `Entering processRequest - ${JSON.stringify(eventData)}`,
     );
 
-    switch (data.event) {
+    switch (eventData.event) {
       case APP_EVENTS.EV_CLICK: {
-        this.pageHandler_clickEvent(data.type);
+        this.pageHandler_clickEvent(eventData.label);
         break;
       }
     }
@@ -27,10 +27,10 @@ export class AppheaderViewManager {
     return this.target;
   }
 
-  pageHandler_clickEvent(type) {
+  pageHandler_clickEvent(label) {
     let path = this.appData.view[VIEW_ID.VW_APPHEADER];
 
-    switch (path.data[type].lbl) {
+    switch (label) {
       case HDR_BUTTON_LABEL.HOME: {
         break;
       }

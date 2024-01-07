@@ -12,12 +12,11 @@ export class MainViewManager {
 
   constructor(private appData: AppData) {}
 
-  processEvent(data: EVENT_DATA) {
+  processEvent(eventData: EVENT_DATA) {
     this.logger.log(
-      `Entering processRequest - event: ${data.event} id: ${data.id} type: ${data.type}`,
-    );
+      `Entering processRequest - ${JSON.stringify(eventData)}`);
 
-    switch (data.id) {
+    switch (eventData.viewId) {
       case VIEW_ID.VW_INDEX: {
         // this.partialHandler_DCDetails(data.event, data.type);
         break;

@@ -1,5 +1,5 @@
 import { VIEW_DATA } from "./constants";
-import { HDR_BUTTON_LABEL, SIDENAV_BUTTON_LABEL, SYSTEM_SUB_BUTTON_LABEL } from "./button-data";
+import { HDR_BUTTON_LABEL, SIDENAV_BUTTON_LABEL, SYSTEM_SUB_BUTTON_LABEL, USER_SUB_BUTTON_LABEL } from "./button-data";
 
 export const enum VIEW_ID {
   VW_INDEX,
@@ -46,12 +46,9 @@ export const view_object_definitions: VIEW_DATA[] = [
     id: VIEW_ID.VW_TABLETEST,
     renderFile: "partials/table",
     viewFlags: [false, false],
-    data: [ {tableName: "My Table Name"},
+    data: [ {tableName: SYSTEM_SUB_BUTTON_LABEL.ZONE_INFO},
       {hdr: ['Zone Cluster', 'VIP Address', 'IP Address', 'Host Name', 'MAC Address', 'HA Role', 'HA State']},
-      {row:[
-        {row_data: ["val1", "val2", "val3"]}, 
-        {row_data: ["val4", "val5", "val6"]},
-        {row_data: ["val7", "val8", "val9"]}]
+      {row:[]
       },],
     query: "select a.parentZoneId as ZoneCluster, a.vIPAddress, c.iPAddress,c.hostName,c.macAddress,d.haRole,d.haState from ServerCluster a, ServerClusterDeviceServerServersMap b, Device c, DeviceServer d where a.id=b.serverClusterId and b.serversId=c.deviceServerId and c.deviceServerId=d.id",
     test: "this"
@@ -61,6 +58,7 @@ export const view_object_definitions: VIEW_DATA[] = [
   {
     id: VIEW_ID.VW_SIDENAV,
     renderFile: "partials/sidenav",
+    altRenderFile: "partials/table",
     viewFlags: [false, false],
     data: [
       { 
@@ -85,18 +83,25 @@ export const view_object_definitions: VIEW_DATA[] = [
         caret: false,
         class: "bi-caret-right",
         subLbl: [
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.ENTERPISE_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.ZONE_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.CCM_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.MEDIA_MGR_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.MEDIA_GWY_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.DEVICE_ZONE_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.IQMAX_TURRET_INVENTORY},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.TURRET_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.JOB_DETAILS_INFO},
-          {lbl: SYSTEM_SUB_BUTTON_LABEL.CDI_COUNTS},] 
+          {lbl: USER_SUB_BUTTON_LABEL.USER_INFO},
+          {lbl: USER_SUB_BUTTON_LABEL.COMMUNICATION_HISTORY},
+          {lbl: USER_SUB_BUTTON_LABEL.JOB_EXECUTION_EVENT},
+          {lbl: USER_SUB_BUTTON_LABEL.JOB_SUMMARY},
+          {lbl: USER_SUB_BUTTON_LABEL.PERSONAL_EXTENSION},
+          {lbl: USER_SUB_BUTTON_LABEL.PERSONALDIRNAMES_INFO},
+          {lbl: USER_SUB_BUTTON_LABEL.USERCDIWITHNOUSERID_INFO},] 
       },
-      { lbl: SIDENAV_BUTTON_LABEL.RECORDING },
+      { lbl: SIDENAV_BUTTON_LABEL.RECORDING,
+        caret: false,
+        class: "bi-caret-right",
+        subLbl: [
+          {lbl: USER_SUB_BUTTON_LABEL.USER_INFO},
+          {lbl: USER_SUB_BUTTON_LABEL.COMMUNICATION_HISTORY},
+          {lbl: USER_SUB_BUTTON_LABEL.JOB_EXECUTION_EVENT},
+          {lbl: USER_SUB_BUTTON_LABEL.JOB_SUMMARY},
+          {lbl: USER_SUB_BUTTON_LABEL.PERSONAL_EXTENSION},
+          {lbl: USER_SUB_BUTTON_LABEL.PERSONALDIRNAMES_INFO},
+          {lbl: USER_SUB_BUTTON_LABEL.USERCDIWITHNOUSERID_INFO},] },
       { lbl: SIDENAV_BUTTON_LABEL.BUTTON },
       { lbl: SIDENAV_BUTTON_LABEL.RESOURCE_AOR },
       { lbl: SIDENAV_BUTTON_LABEL.OPEN_CONNECTION },

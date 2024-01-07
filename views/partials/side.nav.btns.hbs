@@ -1,26 +1,25 @@
 
 <ul style="list-style-type: none; padding-left: 0" class="mt-5">
 {{#each appData.view.[3].data}}
-<div class="me-2 side_item">
   <li
     style="height: 40px"
-    class="d-flex flex-row justify-content-between text-start caret_icon "
+    class="d-flex flex-row justify-content-between text-start caret_icon me-2 side_item"
     aria-expanded="false"
-    hx-get="{{../appData.view.[3].htmx.[0].url}}{{@index}}"
+    hx-get="/element/event/click/"
     hx-swap="innerHTML"
     hx-trigger="click"
     hx-target="#side_nav_btns"
-  >
+    hx-vals='{
+      "index": "{{ @index }}",
+      "label": "{{ this.lbl }}",
+      "view_id": "{{ ../appData.view.[3].id }}",
+      "view_str": "sidnav"
+    }' >
     <p class="mt-1 ms-2">{{ this.lbl }}</p>
      <i class="{{this.class}} me-2 mt-2"></i>
   </li>
-</div>
 {{#if this.caret}}
-<ul style="list-style-type: none; padding-left: 0;" class="">
-  {{#each this.subLbl}}
-    {{> side.nav.subbtns}}
-  {{/each}} 
-</ul>
+  {{> side.nav.subbtns}}
 {{/if}}
 {{/each}}
 </ul>

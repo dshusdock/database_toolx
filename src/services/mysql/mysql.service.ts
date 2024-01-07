@@ -23,6 +23,18 @@ export class MysqlService {
     }
     
     const [rows, fields] = await this.connection.execute('select a.parentZoneId as ZoneCluster, a.vIPAddress, c.iPAddress,c.hostName,c.macAddress,d.haRole,d.haState from ServerCluster a, ServerClusterDeviceServerServersMap b, Device c, DeviceServer d where a.id=b.serverClusterId and b.serversId=c.deviceServerId and c.deviceServerId=d.id');
-    console.log(rows)
+    return rows;
   }
+
+  async query(queryStr: string) {
+
+    if (!this.connection) {
+      await this.createConnection();
+    }
+    
+    const [rows, fields] = await this.connection.execute(queryStr);
+    return rows;
+  }
+
+
 }

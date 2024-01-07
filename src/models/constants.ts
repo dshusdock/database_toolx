@@ -47,6 +47,7 @@ export interface APP_DATA {
 export interface VIEW_DATA {
   id: number;
   renderFile: string;
+  altRenderFile?: string;
   viewFlags: any[]
   data?: any[];
   htmx?: any[];
@@ -59,9 +60,11 @@ export interface VIEW_DATA {
 
 export type EVENT_DATA = {
   event: APP_EVENTS,
-  id: number,
-  type: string,
-  index?: number
+  viewId?: number,
+  viewStr?: string,
+  label?: string,
+  index?: number,
+  subIndex?: number
 }
 
 export const UNIGY_SQL_STRINGS = [

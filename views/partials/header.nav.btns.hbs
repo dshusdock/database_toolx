@@ -5,11 +5,15 @@
     class="btn btn-primary "
     type="button"
     aria-expanded="false"
-    hx-get="{{../appData.view.[1].htmx.[0].url}}{{@index}}"
+    hx-get="/element/event/click/"
     hx-swap="innerHTML"
     hx-trigger="click"
     hx-target="#main-view"
-  >
+    hx-vals='{
+      "index": "{{ @index }}",
+      "label": "{{ this.lbl }}",
+      "view": "{{ ../appData.view.[1].id }}"
+    }'  >
     {{ this.lbl }}
   </button>
 </div>

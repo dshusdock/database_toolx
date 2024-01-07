@@ -32,3 +32,13 @@ export const enum HDR_BUTTON_LABEL {
     CDI_COUNTS = "CDI Counts"
   }
 
+  export const enum USER_SUB_BUTTON_LABEL { 
+    USER_INFO = "User Info",
+    COMMUNICATION_HISTORY = "Communication History",
+    JOB_EXECUTION_EVENT = "Job Execution Event",
+    JOB_SUMMARY = "Job Summary",
+    PERSONAL_EXTENSION = "Personal Extension",
+    PERSONALDIRNAMES_INFO = "PersonalDirNamesInfo",
+    USERCDIWITHNOUSERID_INFO = "UserCDIwithnoUserId Info"
+
+  }

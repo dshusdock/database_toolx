@@ -1,43 +1,71 @@
-import { Injectable } from '@nestjs/common';
-import { AppData } from 'src/models/app-data/app-data';
-import { SIDENAV_BUTTON_LABEL } from 'src/models/button-data';
-import { EVENT_DATA, APP_EVENTS } from 'src/models/constants';
-import { VIEW_ID } from 'src/models/view-object-defintions';
-import { AppLogger } from 'src/utils/logger/app-logger';
+import { Injectable } from "@nestjs/common";
+import { AppData } from "src/models/app-data/app-data";
+import { SIDENAV_BUTTON_LABEL } from "src/models/button-data";
+import { EVENT_DATA, APP_EVENTS } from "src/models/constants";
+import { VIEW_ID } from "src/models/view-object-defintions";
+import { MysqlService } from "src/services/mysql/mysql.service";
+import { AppLogger } from "src/utils/logger/app-logger";
+import { BTN_SQL_QUERIES_MAP } from "../../services/sql-query-manager/sql-queries";
 
 @Injectable()
 export class SidenavViewManager {
-    private logger = new AppLogger(SidenavViewManager.name);
-  target: string = "";
+  private logger = new AppLogger(SidenavViewManager.name);
+  targetView: string = "";
 
-  constructor(private appData: AppData) {}
+  constructor(
+    private appData: AppData,
+    private readonly mysqlSvc: MysqlService,
+  ) {}
 
-  processEvent(data: EVENT_DATA) {
-    this.logger.log(
-      `Entering processRequest - event: ${data.event} id: ${data.id} type: ${data.type} index: ${data.index}`,
-    );
+  processEvent(eventData: EVENT_DATA) {
+    this.logger.log(`Entering processEvent -  ${JSON.stringify(eventData)}`);
 
-    switch (data.event) {
+    switch (eventData.event) {
       case APP_EVENTS.EV_CLICK: {
-        this.pageHandler_clickEvent(data);
+        this.buttonHandler_clickEvent(eventData);
         break;
       }
     }
 
-    return this.target;
+    return this.targetView;
   }
 
-  pageHandler_clickEvent(data) {
+  async buttonHandler_clickEvent(data) {
     let path = this.appData.view[VIEW_ID.VW_SIDENAV];
-    switch (path.data[data.type].lbl) {
-      case SIDENAV_BUTTON_LABEL.USER:
-      case SIDENAV_BUTTON_LABEL.SYSTEM: {
-        path.data[data.type].caret?path.data[data.type].caret=false:path.data[data.type].caret=true;
-        path.data[data.type].class === "bi-caret-right" ? path.data[data.type].class = "bi-caret-down" : path.data[data.type].class = "bi-caret-right";
-        this.target = path.renderFile;
-        break;
+
+    this.logger.log(`Entering buttonHandler_clickEvent`);
+    if (data.subIndex === null) {
+      switch (data.label) {
+        case SIDENAV_BUTTON_LABEL.USER:
+        case SIDENAV_BUTTON_LABEL.RECORDING:
+        case SIDENAV_BUTTON_LABEL.SYSTEM: {
+          path.data[data.index].caret
+            ? (path.data[data.index].caret = false)
+            : (path.data[data.index].caret = true);
+          path.data[data.index].class === "bi-caret-right"
+            ? (path.data[data.index].class = "bi-caret-down")
+            : (path.data[data.index].class = "bi-caret-right");
+          this.targetView = path.renderFile;
+          break;
+        }
       }
+    } else {
+      let obj = BTN_SQL_QUERIES_MAP.find((el) => {
+        if (el.type.localeCompare(data.label) === 0) {
+          return el;
+        }
+      });
+
+      let rows = await this.mysqlSvc.query(obj.sqlStr);
+      this.appData.view[2].data[2].row = [...rows];
+      this.appData.view[2].data[1].hdr = [...obj.header];
+      this.appData.view[2].data[0].tableName = obj.type;
+
+      
+
+      this.targetView = path.altRenderFile;
+
+      return this.targetView;
     }
-    return this.target;
   }
 }

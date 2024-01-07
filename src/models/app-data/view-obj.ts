@@ -3,6 +3,7 @@ import { VIEW_DATA } from '../constants';
 export class ViewObj implements VIEW_DATA {
   id: number;
   renderFile: string;
+  altRenderFile?: string;
   viewFlags: boolean[]
   data?: any[];
   htmx?: any[]
@@ -22,6 +23,7 @@ export class ViewObj implements VIEW_DATA {
     if (obj.style) { this.style = [...obj.style] }
     if (obj.class) { this.class = [...obj.class] }
     if (obj.initData) {this.initData = obj.initData}    
+    if (obj.altRenderFile) { this.altRenderFile = obj.altRenderFile}
   }
 
   async init(data) {

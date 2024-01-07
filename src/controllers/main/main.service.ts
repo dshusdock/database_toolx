@@ -15,7 +15,7 @@ export class MainService {
   constructor(
     private appData: AppData, 
     private readonly mainViewMgr: MainViewManager,
-    private readonly AppheaderViewManager: AppheaderViewManager,
+    private readonly appHeaderViewManager: AppheaderViewManager,
     private readonly sidenavViewMgr: SidenavViewManager ) {
   }
 
@@ -39,40 +39,42 @@ export class MainService {
   }
 
   processEvent(event: APP_EVENTS, params?: any) {
-    this.logger.log(`Entering processRequest - event: ${event} id: ${params.id} type: ${params.type}`);
-    const dataObj: EVENT_DATA = {
+    this.logger.log(`Entering processRequest - ${JSON.stringify(params)}`);
+    const eventData: EVENT_DATA = {
       event: event,
-      id: parseInt(params.id),
-      type: params.type,
-      index: parseInt(params.index)
+      viewId: params.view_id?parseInt(params.view_id):null,
+      viewStr: params.view_str?params.view_str:null,
+      label: params.label,
+      index: parseInt(params.index),
+      subIndex: params.sub_index?parseInt(params.sub_index):null
     };
 
-    const target = this.routeRequest(dataObj);
-    return { target, appData: this.appData, }
+    const targetView = this.routeRequest(eventData);
+    return { targetView, appData: this.appData, }
   }
 
-  routeRequest(data: EVENT_DATA) {
-    let target: any;
+  routeRequest(eventData: EVENT_DATA) {
+    let targetView: any;
 
-    this.logger.log(`Entering routeRequest - event: ${data.event} id: ${data.id} type: ${data.type}`)
+    this.logger.log(`Entering routeRequest - viewId: ${eventData.viewId}`);
 
-    switch (data.id) {
+    switch (eventData.viewId) {
       case VIEW_ID.VW_INDEX:
       case VIEW_ID.VW_APPHEADER: {
-        target = this.AppheaderViewManager.processEvent(data);
+        targetView = this.appHeaderViewManager.processEvent(eventData);
         break;
       }
       case VIEW_ID.VW_TABLETEST: {
         break;
       } 
       case VIEW_ID.VW_SIDENAV: {       
-        target = this.sidenavViewMgr.processEvent(data);
+        targetView = this.sidenavViewMgr.processEvent(eventData);
         break;
       }    
       default: {
-        target = "";
+        targetView = "";
       }
     }
-    return target;
+    return targetView;
   }
 }
