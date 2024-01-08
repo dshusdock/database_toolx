@@ -46,13 +46,11 @@ export const view_object_definitions: VIEW_DATA[] = [
     id: VIEW_ID.VW_TABLETEST,
     renderFile: "partials/table",
     viewFlags: [false, false],
-    data: [ {tableName: SYSTEM_SUB_BUTTON_LABEL.ZONE_INFO},
-      {hdr: ['Zone Cluster', 'VIP Address', 'IP Address', 'Host Name', 'MAC Address', 'HA Role', 'HA State']},
+    data: [ {tableName: ""},
+      {hdr: []},
       {row:[]
       },],
-    query: "select a.parentZoneId as ZoneCluster, a.vIPAddress, c.iPAddress,c.hostName,c.macAddress,d.haRole,d.haState from ServerCluster a, ServerClusterDeviceServerServersMap b, Device c, DeviceServer d where a.id=b.serverClusterId and b.serversId=c.deviceServerId and c.deviceServerId=d.id",
-    test: "this"
-
+    query: "",
   },
   //////////////// 3 ////////////////
   {

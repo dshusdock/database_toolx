@@ -50,6 +50,7 @@ export class MainService {
     };
 
     const targetView = this.routeRequest(eventData);
+    console.log("Here target is: " + targetView);
     return { targetView, appData: this.appData, }
   }
 
@@ -69,12 +70,14 @@ export class MainService {
       } 
       case VIEW_ID.VW_SIDENAV: {       
         targetView = this.sidenavViewMgr.processEvent(eventData);
+        console.log("and here also the target is :" + targetView)
         break;
       }    
       default: {
         targetView = "";
       }
     }
+    console.log("and here target is :" + targetView)
     return targetView;
   }
 }

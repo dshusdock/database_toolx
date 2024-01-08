@@ -30,7 +30,7 @@ export class MainController {
   @Get("/element/event/click/:id/:type")
   handleElementClickEvent(@Param() params: any, @Res() res: Response) {
     this.logger.log(
-      `Path: [/element/event/click/] id = ${params.id} type = ${params.type}`,
+      `Path: 1[/element/event/click/] id = ${params.id} type = ${params.type}`,
     );
 
     const { targetView, appData } = this.mainSvc.processEvent(
@@ -44,7 +44,7 @@ export class MainController {
   @Get('/element/event/click/:id/:index')
   handleElementClickEventMulti(@Param() params: any, @Res() res: Response) {
 
-    this.logger.log(`Path: [/element/event/click/] id = ${params.id} type = ${params.type} index = ${params.index}`);
+    this.logger.log(`Path: 2[/element/event/click/] id = ${params.id} type = ${params.type} index = ${params.index}`);
 
     const { targetView, appData } = this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
 
@@ -54,7 +54,7 @@ export class MainController {
   @Get('/element/event/click/:id/:index/:subindex')
   handleElementClickEventMultiX(@Param() params: any, @Res() res: Response) {
 
-    this.logger.log(`Path: [/element/event/click/] id = ${params.id} type = ${params.type} index = ${params.index}`);
+    this.logger.log(`Path: 3[/element/event/click/] id = ${params.id} type = ${params.type} index = ${params.index}`);
 
     const { targetView, appData } = this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
 
@@ -66,10 +66,10 @@ export class MainController {
   @Get('/element/event/click/')
   handleElementClickEventQuery(@Query() params: any, @Res() res: Response) {
 
-    this.logger.log(`Path: [/element/event/click/] params = ${JSON.stringify(params)} `);
+    this.logger.log(`Path: 4[/element/event/click/] params = ${JSON.stringify(params)} `);
 
     const { targetView, appData } = this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
-
+    console.log("Render - " + targetView);
     return res.render(targetView, { appData });
   }
 }

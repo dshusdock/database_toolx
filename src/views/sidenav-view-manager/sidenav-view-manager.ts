@@ -19,6 +19,7 @@ export class SidenavViewManager {
 
   processEvent(eventData: EVENT_DATA) {
     this.logger.log(`Entering processEvent -  ${JSON.stringify(eventData)}`);
+    let target = "";
 
     switch (eventData.event) {
       case APP_EVENTS.EV_CLICK: {
@@ -26,14 +27,14 @@ export class SidenavViewManager {
         break;
       }
     }
-
+    console.log("and look here target is :" + this.targetView)
     return this.targetView;
   }
 
   async buttonHandler_clickEvent(data) {
     let path = this.appData.view[VIEW_ID.VW_SIDENAV];
 
-    this.logger.log(`Entering buttonHandler_clickEvent`);
+    this.logger.log(`Entering buttonHandler_clickEvent - ${JSON.stringify(path)}`);
     if (data.subIndex === null) {
       switch (data.label) {
         case SIDENAV_BUTTON_LABEL.USER:
@@ -50,6 +51,7 @@ export class SidenavViewManager {
         }
       }
     } else {
+      console.log("HERE")
       let obj = BTN_SQL_QUERIES_MAP.find((el) => {
         if (el.type.localeCompare(data.label) === 0) {
           return el;
@@ -61,9 +63,8 @@ export class SidenavViewManager {
       this.appData.view[2].data[1].hdr = [...obj.header];
       this.appData.view[2].data[0].tableName = obj.type;
 
-      
-
       this.targetView = path.altRenderFile;
+      console.log("Target - " + this.targetView);
 
       return this.targetView;
     }
