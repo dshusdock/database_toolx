@@ -1,3 +1,5 @@
+import { SYSTEM_SUB_BUTTON_LABEL } from "./button-data";
+
 export const SUCCESS = 0;
 export const ERROR = 1;
 
@@ -71,3 +73,9 @@ export const UNIGY_SQL_STRINGS = [
   "select a.parentZoneId as ZoneCluster, a.vIPAddress, c.iPAddress,c.hostName,c.macAddress,d.haRole,d.haState from ServerCluster a, ServerClusterDeviceServerServersMap b, Device c, DeviceServer d where a.id=b.serverClusterId and b.serversId=c.deviceServerId and c.deviceServerId=d.id')",
   ""
 ]
+
+export type BTN_SQL_QUERIES_MAP_DEF = {
+  type: SYSTEM_SUB_BUTTON_LABEL,
+  sqlStr: string,
+  header: string[]
+}

@@ -6,6 +6,7 @@ import { VIEW_ID } from 'src/models/view-object-defintions';
 import { MainViewManager } from "src/views/main-view-manager/main-view-manager";
 import { AppheaderViewManager } from "src/views/appheader-view-manager/appheader-view-manager";
 import { SidenavViewManager } from "src/views/sidenav-view-manager/sidenav-view-manager";
+import { TableManager } from "src/services/table-manager/table-manager";
 
 @Injectable()
 export class MainService {
@@ -16,7 +17,8 @@ export class MainService {
     private appData: AppData, 
     private readonly mainViewMgr: MainViewManager,
     private readonly appHeaderViewManager: AppheaderViewManager,
-    private readonly sidenavViewMgr: SidenavViewManager ) {
+    private readonly sidenavViewMgr: SidenavViewManager,
+    private readonly tableMgr: TableManager ) {
   }
 
   async init() {
@@ -66,6 +68,7 @@ export class MainService {
         break;
       }
       case VIEW_ID.VW_TABLETEST: {
+        targetView = this.tableMgr.processEvent(eventData);
         break;
       } 
       case VIEW_ID.VW_SIDENAV: {       

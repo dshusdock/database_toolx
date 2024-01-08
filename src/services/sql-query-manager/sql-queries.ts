@@ -1,7 +1,8 @@
 
+import { BTN_SQL_QUERIES_MAP_DEF } from 'src/models/constants';
 import { SYSTEM_SUB_BUTTON_LABEL } from '../../models/button-data';
 
-export const BTN_SQL_QUERIES_MAP  = [
+export const BTN_SQL_QUERIES_MAP: BTN_SQL_QUERIES_MAP_DEF[]  = [
     {
         type: SYSTEM_SUB_BUTTON_LABEL.ENTERPISE_INFO,
         sqlStr: "select d.name as EnterpriseName, d.domainName as EnterpriseDomainName, c.name as InstanceName, c.domainName as InstanceDomainName, a.id as ZoneId, a.certificateAuthorityIP, a.name, a.softwareVersion, b.replicationEnabled, b.replicationRole from Zone a, InterzoneCommConfigZone b, Instance c, Enterprise d where d.id=c.parentEnterpriseId and c.id=a.parentInstanceId and b.id=a.interzoneCommConfigZoneId",
