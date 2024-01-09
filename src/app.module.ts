@@ -9,11 +9,11 @@ import { MainViewManager } from './views/main-view-manager/main-view-manager';
 import { AppheaderViewManager } from './views/appheader-view-manager/appheader-view-manager';
 import { SidenavViewManager } from './views/sidenav-view-manager/sidenav-view-manager';
 import { SqlQueryManager } from './services/sql-query-manager/sql-query-manager';
-import { TableManager } from './services/table-manager/table-manager';
+import { TableViewManager } from './views/table-view-manager/table-view-manager';
 
 @Module({
   imports: [],
   controllers: [AppController, MainController],
-  providers: [AppLogger, MainService, AppData, MysqlService, MainViewManager, AppheaderViewManager, SidenavViewManager, SqlQueryManager, TableManager],
+  providers: [AppLogger, MainService, AppData, MysqlService, MainViewManager, AppheaderViewManager, SidenavViewManager, SqlQueryManager, TableViewManager],
 })
 export class AppModule {}

@@ -6,7 +6,7 @@ import { VIEW_ID } from 'src/models/view-object-defintions';
 import { MainViewManager } from "src/views/main-view-manager/main-view-manager";
 import { AppheaderViewManager } from "src/views/appheader-view-manager/appheader-view-manager";
 import { SidenavViewManager } from "src/views/sidenav-view-manager/sidenav-view-manager";
-import { TableManager } from "src/services/table-manager/table-manager";
+import { TableViewManager } from "src/views/table-view-manager/table-view-manager";
 
 @Injectable()
 export class MainService {
@@ -18,7 +18,7 @@ export class MainService {
     private readonly mainViewMgr: MainViewManager,
     private readonly appHeaderViewManager: AppheaderViewManager,
     private readonly sidenavViewMgr: SidenavViewManager,
-    private readonly tableMgr: TableManager ) {
+    private readonly tableMgr: TableViewManager ) {
   }
 
   async init() {
@@ -41,7 +41,7 @@ export class MainService {
   }
 
   processEvent(event: APP_EVENTS, params?: any) {
-    this.logger.log(`Entering processRequest - ${JSON.stringify(params)}`);
+    this.logger.log(`Entering processEvent - ${JSON.stringify(params)}`);
     const eventData: EVENT_DATA = {
       event: event,
       viewId: params.view_id?parseInt(params.view_id):null,
@@ -67,8 +67,9 @@ export class MainService {
         targetView = this.appHeaderViewManager.processEvent(eventData);
         break;
       }
-      case VIEW_ID.VW_TABLETEST: {
+      case VIEW_ID.VW_TABLE: {
         targetView = this.tableMgr.processEvent(eventData);
+        console.log("-->and here target is :" + targetView)
         break;
       } 
       case VIEW_ID.VW_SIDENAV: {       
@@ -80,7 +81,7 @@ export class MainService {
         targetView = "";
       }
     }
-    console.log("and here target is :" + targetView)
+    
     return targetView;
   }
 }

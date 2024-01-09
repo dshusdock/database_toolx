@@ -9,7 +9,7 @@ import {
 export const enum VIEW_ID {
   VW_INDEX,
   VW_APPHEADER,
-  VW_TABLETEST,
+  VW_TABLE,
   VW_SIDENAV,
 }
 
@@ -19,7 +19,7 @@ export const view_object_definitions: VIEW_DATA[] = [
     id: VIEW_ID.VW_INDEX,
     renderFile: "index",
     viewFlags: [false, false],
-    data: [],
+    data: [{mode: "light"}],
     test: "this",
   },
   //////////////// 1 ////////////////
@@ -41,7 +41,7 @@ export const view_object_definitions: VIEW_DATA[] = [
   },
   //////////////// 2 ////////////////
   {
-    id: VIEW_ID.VW_TABLETEST,
+    id: VIEW_ID.VW_TABLE,
     renderFile: "partials/table",
     viewFlags: [false, false],
     data: [
@@ -49,6 +49,7 @@ export const view_object_definitions: VIEW_DATA[] = [
       { hdr: [] },
       { row: [] },
       { rowCount: 10, size: 0, start: 0, ptr: 0 },
+      { query: ""}
     ],
     query: "",
   },

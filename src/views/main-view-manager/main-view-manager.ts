@@ -21,7 +21,7 @@ export class MainViewManager {
         // this.partialHandler_DCDetails(data.event, data.type);
         break;
       }
-      case VIEW_ID.VW_TABLETEST: {
+      case VIEW_ID.VW_TABLE: {
         //this.partialHandler_SideNav(data.event, data.type);
         break;
       }

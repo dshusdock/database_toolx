@@ -11,7 +11,11 @@
     <div class="col">
      <!--This is where <outlet> used to live-->
       <div id="main-view">
-       {{> table}}
+        {{#if appData.view.[0].viewFlags.[0] }}
+          {{> table}}
+        {{else}}
+          {{> init}}
+        {{/if}}
       </div>
       
     </div>

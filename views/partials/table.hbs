@@ -25,7 +25,39 @@
     </tbody>
   </table>
   <div class="d-flex flex-row">
-   <button style="width: 5em;" type="button" class="btn btn-primary me-3">Previous</button>
-   <button style="width: 5em;" type="button" class="btn btn-primary">Next</button>
+    <button
+      style="width: 5em;"
+      type="button"
+      class="btn btn-primary me-3"
+      hx-get="/element/event/click/"
+      hx-swap="innerHTML"
+      hx-trigger="click"
+      hx-target="#table1"
+      hx-vals='{
+        "index": "",
+        "sub_index": "",
+        "label": "Previous",
+        "view_id": "2", 
+        "view_str": "table"}'
+    >
+      Previous
+    </button>
+    <button
+      style="width: 5em;"
+      type="button"
+      class="btn btn-primary"
+      hx-get="/element/event/click/"
+      hx-swap="innerHTML"
+      hx-trigger="click"
+      hx-target="#table1"
+      hx-vals='{
+        "index": "",
+        "sub_index": "",
+        "label": "Next",
+        "view_id": "2", 
+        "view_str": "table"}'
+    >
+      Next
+    </button>
   </div>
 </div>

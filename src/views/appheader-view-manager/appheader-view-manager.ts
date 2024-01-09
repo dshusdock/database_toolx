@@ -8,13 +8,13 @@ import { AppLogger } from "src/utils/logger/app-logger";
 @Injectable()
 export class AppheaderViewManager {
   private logger = new AppLogger(AppheaderViewManager.name);
-  target: string = "";
+  target: string = "index";
 
   constructor(private appData: AppData) {}
 
   processEvent(eventData: EVENT_DATA) {
     this.logger.log(
-      `Entering processRequest - ${JSON.stringify(eventData)}`,
+      `Entering processEvent - ${JSON.stringify(eventData)}`,
     );
 
     switch (eventData.event) {
@@ -34,9 +34,13 @@ export class AppheaderViewManager {
       case HDR_BUTTON_LABEL.HOME: {
         break;
       }
-      case HDR_BUTTON_LABEL.LOAD_DB: {
+      case HDR_BUTTON_LABEL.LOGOUT: {
+        console.log("HERE")
+        this.appData.view[0].data[0].mode = "dark";
+
         break;
       }
+      
     }
   }
 }

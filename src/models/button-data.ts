@@ -42,3 +42,8 @@ export const enum HDR_BUTTON_LABEL {
     USERCDIWITHNOUSERID_INFO = "UserCDIwithnoUserId Info"
 
   }
+
+  export const enum TABLE_BUTTON_LABEL { 
+    PREVIOUS = "Previous",
+    NEXT = "Next"
+  }

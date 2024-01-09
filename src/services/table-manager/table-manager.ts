@@ -16,7 +16,7 @@ export class TableManager {
   processEvent(eventData: EVENT_DATA) {}
 
   async setCurrentSQLObject(obj: BTN_SQL_QUERIES_MAP_DEF) {
-    const path = this.appData.view[VIEW_ID.VW_TABLETEST];
+    const path = this.appData.view[VIEW_ID.VW_TABLE];
     const start = path.data[3].start;
     const end = path.data[3].start + path.data[3].rowCount;
     this.tableGroup.push(obj);

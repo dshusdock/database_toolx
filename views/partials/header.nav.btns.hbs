@@ -8,13 +8,17 @@
     hx-get="/element/event/click/"
     hx-swap="innerHTML"
     hx-trigger="click"
-    hx-target="#main-view"
+    hx-target="#html_tag"
     hx-vals='{
       "index": "{{ @index }}",
       "label": "{{ this.lbl }}",
-      "view": "{{ ../appData.view.[1].id }}"
-    }'  >
+      "view_id": "{{ ../appData.view.[1].id }}",
+      "view_str": "sidnav"
+    }' >
     {{ this.lbl }}
   </button>
 </div>
 {{/each}}
+
+
+ 
