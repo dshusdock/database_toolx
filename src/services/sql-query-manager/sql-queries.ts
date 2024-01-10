@@ -22,6 +22,21 @@ export const BTN_SQL_QUERIES_MAP: BTN_SQL_QUERIES_MAP_DEF[]  = [
         type : SYSTEM_SUB_BUTTON_LABEL.MEDIA_MGR_INFO,
         sqlStr: "select a.hostname, a.macAddress, a.iPAddress,a.parentZoneId,b.serverPersonality, d.requestOperationalState from Device a, DeviceServer b, ComponentMediaServer d where a.deviceTypeId=5 and a.deviceServerId = b.id and b.componentMediaServerId=d.id",
         header: ['Host Name', 'MAC Address', 'IP Address', 'Parent Zone ID', 'Server Personality', 'Request Operational State']
+    },
+    {
+        type : SYSTEM_SUB_BUTTON_LABEL.MEDIA_GWY_INFO,
+        sqlStr: "select a.name, a.macAddress, a.iPAddress,a.parentZoneId from Device a where a.deviceTypeId=2",
+        header: ["MG Name", "MAC Address", "IP Address", "Parent Zone ID"]
+    },
+    {
+        type : SYSTEM_SUB_BUTTON_LABEL.DEVICE_ZONE_INFO,
+        sqlStr: "select a.macAddress, a.IPAddress, d.loginName, a.parentZoneId as 'DeployZone', b.backupZoneId as 'BcpZone',b.preference as 'BcpPref',c.zoneId as 'CurrentZone' from Device a, CDIBCPPreference b, LogonSession c, User d where a.id=b.parentDeviceId and a.id=c.deviceId and c.userId=d.id order by a.parentZoneId, a.macAddress,b.backupZoneId,b.preference",
+        header: ['MAC Address', 'IP Address', 'Login Name', 'Deploy Zone', 'Bcp Zone', 'Bcp Pref', 'Current Zone']
+    },
+    {
+        type : SYSTEM_SUB_BUTTON_LABEL.IQMAX_TURRET_INVENTORY,
+        sqlStr: "select a.id, a.macAddress, a.iPAddress, a.model, a.inventoryInfo, a.inventoryRegistrationTime, b.userId, b.loginName from Device a left join (select d.deviceId, d.userId, e.loginName from LogonSession d, User e where d.userId=e.id) b on a.id=b.deviceId where a.model='IQMAX' and a.inventoryInfo like '%.0 hwpart%'",
+        header: ['Device ID', 'MAC Address', 'IP Address', 'Model', 'Inventory Info', 'inventory Registration Time', 'User ID', 'Login Name']
     }
 ]
 

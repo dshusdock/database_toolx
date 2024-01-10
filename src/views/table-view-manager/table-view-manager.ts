@@ -91,17 +91,20 @@ export class TableViewManager {
   }
 
   async setCurrentSQLObject(obj: BTN_SQL_QUERIES_MAP_DEF) {
+   
     const path = this.appData.view[VIEW_ID.VW_TABLE];
     path.data[4].query = obj.sqlStr;
+    path.data[3].star = 0;
     const start = path.data[3].start;
     const end = path.data[3].start + path.data[3].rowCount;
     this.tableGroup.push(obj);
 
     let rows = await this.mysqlSvc.query(obj.sqlStr);
     this.appData.view[2].data[3].size = rows.length;
-    console.log("The size is: " + this.appData.view[2].data[3].length) ;
+    console.log("The size is: " + this.appData.view[2].data[3].size + " rows");
     this.appData.view[2].data[2].row = rows.slice(start, end);
     this.appData.view[2].data[1].hdr = [...obj.header];
     this.appData.view[2].data[0].tableName = obj.type;
+   
   }
 }

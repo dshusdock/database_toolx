@@ -33,8 +33,11 @@ export class MysqlService {
     }
     
     const [rows, fields] = await this.connection.execute(queryStr);
+    console.log("Got row:"  + JSON.stringify(rows[0]))
     return rows;
   }
+
+  
 
 
 }
