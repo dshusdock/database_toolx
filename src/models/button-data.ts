@@ -29,7 +29,8 @@ export const enum HDR_BUTTON_LABEL {
     IQMAX_TURRET_INVENTORY = "IQMAX Turret Inventory",
     TURRET_INFO = "Turret Info",
     JOB_DETAILS_INFO = "Job Details Info",
-    CDI_COUNTS = "CDI Counts"
+    CDI_COUNTS = "CDI Counts",
+    LICENSE_INFO = "License Info"
   }
 
   export const enum USER_SUB_BUTTON_LABEL { 

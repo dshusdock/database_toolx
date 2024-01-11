@@ -91,18 +91,15 @@ export class TableViewManager {
     this.appData.view[2].data[2].row = rows.slice(start, end);
   }
 
-
-
-
-
   setCurrentSQLObject = async (obj: BTN_SQL_QUERIES_MAP_DEF): Promise<void> => {
     return new Promise( async (resolve, reject) =>{
       console.log(">>>C")
       //const path = this.appData.view[VIEW_ID.VW_TABLE];
       this.appData.view[VIEW_ID.VW_TABLE].data[4].query = obj.sqlStr;
-      this.appData.view[VIEW_ID.VW_TABLE].data[3].star = 0;
+      this.appData.view[VIEW_ID.VW_TABLE].data[3].start = 0;
       const start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
-      const end = this.appData.view[VIEW_ID.VW_TABLE].data[3].start + this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
+      const end = this.appData.view[VIEW_ID.VW_TABLE].data[3].start 
+        + this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
       this.tableGroup.push(obj);
   
       let rows = await this.mysqlSvc.query(obj.sqlStr);

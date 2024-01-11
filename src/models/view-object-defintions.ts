@@ -75,6 +75,7 @@ export const view_object_definitions: VIEW_DATA[] = [
           { lbl: SYSTEM_SUB_BUTTON_LABEL.TURRET_INFO },
           { lbl: SYSTEM_SUB_BUTTON_LABEL.JOB_DETAILS_INFO },
           { lbl: SYSTEM_SUB_BUTTON_LABEL.CDI_COUNTS },
+          { lbl: SYSTEM_SUB_BUTTON_LABEL.LICENSE_INFO },
         ],
       },
       {
