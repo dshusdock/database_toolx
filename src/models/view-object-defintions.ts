@@ -18,7 +18,7 @@ export const view_object_definitions: VIEW_DATA[] = [
   {
     id: VIEW_ID.VW_INDEX,
     renderFile: "index",
-    viewFlags: [false, false],
+    viewFlags: [false],
     data: [{mode: "light"}],
     test: "this",
   },

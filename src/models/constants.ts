@@ -17,6 +17,11 @@ export type NODE = {
   name: string;
 }
 
+export interface RENDER_DATA  {
+  targetView: string;
+  appData: APP_DATA;
+}
+
 export const enum VIEW_TYPE {
   SERVER_VIEW = "Server View",
   POOL_VIEW = "Pool View",

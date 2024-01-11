@@ -24,6 +24,8 @@ export class AppData {
 
   async init() {
     this.logger.log("In initNew...");
+    this.view = [];
+    this.data = [];
     //let data = await this.proxmoxApiSvc.getRequest('/api2/json/cluster/resources');
     // This is where we would reach out to the API server and get some data
     let data = {};

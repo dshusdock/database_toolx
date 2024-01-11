@@ -10,6 +10,7 @@ import { VIEW_ID } from "src/models/view-object-defintions";
 import { AppLogger } from "src/utils/logger/app-logger";
 import { TABLE_BUTTON_LABEL } from "src/models/button-data";
 
+
 @Injectable()
 export class TableViewManager {
   private logger = new AppLogger(TableViewManager.name);
@@ -21,13 +22,13 @@ export class TableViewManager {
     private readonly mysqlSvc: MysqlService,
   ) {}
 
-  processEvent(eventData: EVENT_DATA) {
+  async processEvent(eventData: EVENT_DATA) {
     this.logger.log(`Entering processEvent -  ${JSON.stringify(eventData)}`);
 
     try {
       switch (eventData.event) {
         case APP_EVENTS.EV_CLICK: {
-          this.btnHandlerNavigate(eventData);
+          await this.btnHandlerNavigate(eventData);
           break;
         }
       }
@@ -38,7 +39,7 @@ export class TableViewManager {
   }
 
   async btnHandlerNavigate(data) {
-    let path = this.appData.view[VIEW_ID.VW_TABLE];
+    //let path = this.appData.view[VIEW_ID.VW_TABLE];
 
     this.logger.log(`Entering btnHandlerNavigate `);
 
@@ -55,11 +56,11 @@ export class TableViewManager {
   }
 
   async displayNextRows() {
-    const path = this.appData.view[VIEW_ID.VW_TABLE];
-    let rows = await this.mysqlSvc.query(path.data[4].query);
-    let start = path.data[3].start;
-    let rowCount = path.data[3].rowCount;
-    let size = path.data[3].size;
+    //const path = this.appData.view[VIEW_ID.VW_TABLE];
+    let rows = await this.mysqlSvc.query(this.appData.view[VIEW_ID.VW_TABLE].data[4].query);
+    let start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
+    let rowCount = this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
+    let size = this.appData.view[VIEW_ID.VW_TABLE].data[3].size;
     
     start+=rowCount;
     if (start > size){ return }
@@ -73,11 +74,11 @@ export class TableViewManager {
   }
 
   async displayPreviousRows() {
-    const path = this.appData.view[VIEW_ID.VW_TABLE];
-    let rows = await this.mysqlSvc.query(path.data[4].query);
-    let start = path.data[3].start;
-    let rowCount = path.data[3].rowCount;
-    let size = path.data[3].size;
+    //const path = this.appData.view[VIEW_ID.VW_TABLE];
+    let rows = await this.mysqlSvc.query(this.appData.view[VIEW_ID.VW_TABLE].data[4].query);
+    let start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
+    let rowCount = this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
+    let size = this.appData.view[VIEW_ID.VW_TABLE].data[3].size;
 
     start-=rowCount;
     if (start < 0) { start = 0 }
@@ -90,21 +91,29 @@ export class TableViewManager {
     this.appData.view[2].data[2].row = rows.slice(start, end);
   }
 
-  async setCurrentSQLObject(obj: BTN_SQL_QUERIES_MAP_DEF) {
-   
-    const path = this.appData.view[VIEW_ID.VW_TABLE];
-    path.data[4].query = obj.sqlStr;
-    path.data[3].star = 0;
-    const start = path.data[3].start;
-    const end = path.data[3].start + path.data[3].rowCount;
-    this.tableGroup.push(obj);
 
-    let rows = await this.mysqlSvc.query(obj.sqlStr);
-    this.appData.view[2].data[3].size = rows.length;
-    console.log("The size is: " + this.appData.view[2].data[3].size + " rows");
-    this.appData.view[2].data[2].row = rows.slice(start, end);
-    this.appData.view[2].data[1].hdr = [...obj.header];
-    this.appData.view[2].data[0].tableName = obj.type;
-   
+
+
+
+  setCurrentSQLObject = async (obj: BTN_SQL_QUERIES_MAP_DEF): Promise<void> => {
+    return new Promise( async (resolve, reject) =>{
+      console.log(">>>C")
+      //const path = this.appData.view[VIEW_ID.VW_TABLE];
+      this.appData.view[VIEW_ID.VW_TABLE].data[4].query = obj.sqlStr;
+      this.appData.view[VIEW_ID.VW_TABLE].data[3].star = 0;
+      const start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
+      const end = this.appData.view[VIEW_ID.VW_TABLE].data[3].start + this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
+      this.tableGroup.push(obj);
+  
+      let rows = await this.mysqlSvc.query(obj.sqlStr);
+      this.appData.view[2].data[3].size = rows.length;
+      console.log("The size is: " + this.appData.view[2].data[3].size + " rows");
+  
+      this.appData.view[2].data[2].row = rows.slice(start, end);
+      this.appData.view[2].data[1].hdr = [...obj.header];
+      this.appData.view[2].data[0].tableName = obj.type;
+      console.log(">>>D")
+      resolve();
+    });
   }
 }
