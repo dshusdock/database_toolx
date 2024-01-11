@@ -1,4 +1,4 @@
-import { SYSTEM_SUB_BUTTON_LABEL } from "./button-data";
+import { BUTTON_SUB_BUTTON_LABEL, RECORDING_SUB_BUTTON_LABEL, SYSTEM_SUB_BUTTON_LABEL, USER_SUB_BUTTON_LABEL } from "./button-data";
 
 export const SUCCESS = 0;
 export const ERROR = 1;
@@ -80,7 +80,8 @@ export const UNIGY_SQL_STRINGS = [
 ]
 
 export type BTN_SQL_QUERIES_MAP_DEF = {
-  type: SYSTEM_SUB_BUTTON_LABEL,
+  type: SYSTEM_SUB_BUTTON_LABEL | USER_SUB_BUTTON_LABEL | RECORDING_SUB_BUTTON_LABEL |
+  BUTTON_SUB_BUTTON_LABEL ,
   sqlStr: string,
   header: string[]
 }

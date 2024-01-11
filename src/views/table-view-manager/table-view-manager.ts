@@ -39,8 +39,6 @@ export class TableViewManager {
   }
 
   async btnHandlerNavigate(data) {
-    //let path = this.appData.view[VIEW_ID.VW_TABLE];
-
     this.logger.log(`Entering btnHandlerNavigate `);
 
     switch (data.label) {
@@ -67,9 +65,6 @@ export class TableViewManager {
 
     this.appData.view[2].data[3].start = start;
     let end = start + rowCount;
-    console.log("start: " + start) 
-    console.log("end: " + end) 
-    // console.log("rows: " + JSON.stringify(rows))
     this.appData.view[2].data[2].row = rows.slice(start, end);
   }
 
@@ -83,18 +78,12 @@ export class TableViewManager {
     start-=rowCount;
     if (start < 0) { start = 0 }
     this.appData.view[2].data[3].start = start;
-
     let end = start + rowCount;
-    console.log("start: " + start) 
-    console.log("end: " + end) 
-    // console.log("rows: " + JSON.stringify(rows))
     this.appData.view[2].data[2].row = rows.slice(start, end);
   }
 
   setCurrentSQLObject = async (obj: BTN_SQL_QUERIES_MAP_DEF): Promise<void> => {
     return new Promise( async (resolve, reject) =>{
-      console.log(">>>C")
-      //const path = this.appData.view[VIEW_ID.VW_TABLE];
       this.appData.view[VIEW_ID.VW_TABLE].data[4].query = obj.sqlStr;
       this.appData.view[VIEW_ID.VW_TABLE].data[3].start = 0;
       const start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
@@ -104,12 +93,11 @@ export class TableViewManager {
   
       let rows = await this.mysqlSvc.query(obj.sqlStr);
       this.appData.view[2].data[3].size = rows.length;
-      console.log("The size is: " + this.appData.view[2].data[3].size + " rows");
+      this.logger.log("Received size is: " + this.appData.view[2].data[3].size + " rows");
   
       this.appData.view[2].data[2].row = rows.slice(start, end);
       this.appData.view[2].data[1].hdr = [...obj.header];
       this.appData.view[2].data[0].tableName = obj.type;
-      console.log(">>>D")
       resolve();
     });
   }

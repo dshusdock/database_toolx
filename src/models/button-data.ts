@@ -40,9 +40,28 @@ export const enum HDR_BUTTON_LABEL {
     JOB_SUMMARY = "Job Summary",
     PERSONAL_EXTENSION = "Personal Extension",
     PERSONALDIRNAMES_INFO = "PersonalDirNamesInfo",
-    USERCDIWITHNOUSERID_INFO = "UserCDIwithnoUserId Info"
-
+    USERCDIWITHNOUSERID_INFO = "UserCDIwithnoUserId Info",
+    CALLS_PER_DAY = "Calls Per Day",
+    CALLS_PER_DAY_PER_USER = "Calls Per Day Per User"
   }
+
+  export const enum RECORDING_SUB_BUTTON_LABEL { 
+    RECORDING_MIX = "Recording Mix",
+    RECORDING_MIX_WITH_MASK = "Recording Mix with Mask",
+    RECORDING_MIX_LOGONSESSION = "Recording Mix LogOnSession",
+  }
+
+  export const enum BUTTON_SUB_BUTTON_LABEL { 
+    BUTTON_RESOURCE_APPEARANCE = "Button Resource Appearance",
+    BUTTON_INFO = "Button Info",
+    ARD_BUTTON_INFO = "ARD Button Info",
+    FIND_NON600BUTTONSUSERS_INFO  = "Find Non-600ButtonUsers Info",
+    DUPLICATE_BUTTON_INFO = "DuplicateButton Info",
+    UNLINKED_BUTTONS = "Unlinked Buttons",
+    MISSING_DUPE_BUTTONS = "Missing/Dupe Buttons"
+  }
+
+
 
   export const enum TABLE_BUTTON_LABEL { 
     PREVIOUS = "Previous",

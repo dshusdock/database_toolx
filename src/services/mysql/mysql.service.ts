@@ -1,8 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import * as mysql from "mysql2/promise";
+import { AppLogger } from "src/utils/logger/app-logger";
+
 
 @Injectable()
 export class MysqlService {
+  private logger = new AppLogger(MysqlService.name);
   private connection: any = null;;
 
   constructor() {}
@@ -33,7 +36,7 @@ export class MysqlService {
     }
     
     const [rows, fields] = await this.connection.execute(queryStr);
-    console.log("Got row:"  + JSON.stringify(rows[0]))
+    this.logger.log("Got row:"  + JSON.stringify(rows[0]))
     return rows;
   }
 

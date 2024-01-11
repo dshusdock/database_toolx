@@ -1,6 +1,8 @@
 import { VIEW_DATA } from "./constants";
 import {
+  BUTTON_SUB_BUTTON_LABEL,
   HDR_BUTTON_LABEL,
+  RECORDING_SUB_BUTTON_LABEL,
   SIDENAV_BUTTON_LABEL,
   SYSTEM_SUB_BUTTON_LABEL,
   USER_SUB_BUTTON_LABEL,
@@ -90,6 +92,9 @@ export const view_object_definitions: VIEW_DATA[] = [
           { lbl: USER_SUB_BUTTON_LABEL.PERSONAL_EXTENSION },
           { lbl: USER_SUB_BUTTON_LABEL.PERSONALDIRNAMES_INFO },
           { lbl: USER_SUB_BUTTON_LABEL.USERCDIWITHNOUSERID_INFO },
+          { lbl: USER_SUB_BUTTON_LABEL.CALLS_PER_DAY },
+          { lbl: USER_SUB_BUTTON_LABEL.CALLS_PER_DAY_PER_USER },
+
         ],
       },
       {
@@ -97,16 +102,26 @@ export const view_object_definitions: VIEW_DATA[] = [
         caret: false,
         class: "bi-caret-right",
         subLbl: [
-          { lbl: USER_SUB_BUTTON_LABEL.USER_INFO },
-          { lbl: USER_SUB_BUTTON_LABEL.COMMUNICATION_HISTORY },
-          { lbl: USER_SUB_BUTTON_LABEL.JOB_EXECUTION_EVENT },
-          { lbl: USER_SUB_BUTTON_LABEL.JOB_SUMMARY },
-          { lbl: USER_SUB_BUTTON_LABEL.PERSONAL_EXTENSION },
-          { lbl: USER_SUB_BUTTON_LABEL.PERSONALDIRNAMES_INFO },
-          { lbl: USER_SUB_BUTTON_LABEL.USERCDIWITHNOUSERID_INFO },
+          { lbl: RECORDING_SUB_BUTTON_LABEL.RECORDING_MIX },
+          { lbl: RECORDING_SUB_BUTTON_LABEL.RECORDING_MIX_WITH_MASK },
+          { lbl: RECORDING_SUB_BUTTON_LABEL.RECORDING_MIX_LOGONSESSION },
         ],
       },
-      { lbl: SIDENAV_BUTTON_LABEL.BUTTON },
+      { 
+        lbl: SIDENAV_BUTTON_LABEL.BUTTON,
+        caret: false,
+        class: "bi-caret-right",
+        subLbl: [
+          { lbl: BUTTON_SUB_BUTTON_LABEL.BUTTON_RESOURCE_APPEARANCE },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.BUTTON_INFO },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.ARD_BUTTON_INFO },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.FIND_NON600BUTTONSUSERS_INFO },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.DUPLICATE_BUTTON_INFO },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.UNLINKED_BUTTONS },
+          { lbl: BUTTON_SUB_BUTTON_LABEL.MISSING_DUPE_BUTTONS },
+        ], 
+      
+      },
       { lbl: SIDENAV_BUTTON_LABEL.RESOURCE_AOR },
       { lbl: SIDENAV_BUTTON_LABEL.OPEN_CONNECTION },
       { lbl: SIDENAV_BUTTON_LABEL.LINE },

@@ -40,7 +40,6 @@ export class SidenavViewManager {
         }
       }
 
-      console.log(">>>E")
       resolve(this.targetView);
     });
   }
@@ -56,6 +55,7 @@ export class SidenavViewManager {
       switch (data.label) {
         case SIDENAV_BUTTON_LABEL.USER:
         case SIDENAV_BUTTON_LABEL.RECORDING:
+        case SIDENAV_BUTTON_LABEL.BUTTON:
         case SIDENAV_BUTTON_LABEL.SYSTEM: {
           path.data[data.index].caret
             ? (path.data[data.index].caret = false)
@@ -82,9 +82,7 @@ export class SidenavViewManager {
           return el;
         }
       });
-      console.log(">>>A")
        await this.tableMgr.setCurrentSQLObject(obj);
-      console.log(">>>B")
       resolve(this.targetView);
     });
   }

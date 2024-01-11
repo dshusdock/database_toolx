@@ -53,7 +53,6 @@ export class MainService {
       };
   
       const targetView = await this.routeRequest(eventData);
-      console.log("Here target is: " + targetView);
       resolve({targetView, appData: this.appData});
     });
   }
@@ -72,14 +71,10 @@ export class MainService {
         }
         case VIEW_ID.VW_TABLE: {
           targetView = this.tableMgr.processEvent(eventData);
-          console.log(">>>F1")
-          //console.log("-->and here target is :" + targetView)
           break;
         } 
         case VIEW_ID.VW_SIDENAV: {       
           targetView =  await this.sidenavViewMgr.processEvent(eventData);
-          console.log(">>>F2:" + JSON.stringify(targetView))
-          //console.log("and here also the target is :" + targetView)
           break;
         }    
         default: {
