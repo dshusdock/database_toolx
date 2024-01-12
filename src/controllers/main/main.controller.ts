@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Render, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Render, Res } from "@nestjs/common";
 import { MainService } from "./main.service";
 import { Response } from 'express';
 import { AppLogger } from "src/utils/logger/app-logger";
@@ -71,4 +71,15 @@ export class MainController {
     const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
     return res.render(targetView, { appData });
   }
+
+  @Post('/element/event/search/')
+  async handleTableSearch(@Body() params: any, @Res() res: Response) {
+   
+   this.logger.log(`Path: [/element/event/search/] body = ${JSON.stringify(params)} `);
+
+   const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.SEARCH, params);
+   console.log("B")
+
+   return res.render(targetView, { appData });
+ }
 }

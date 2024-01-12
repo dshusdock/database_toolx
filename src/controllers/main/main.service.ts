@@ -49,7 +49,8 @@ export class MainService {
         viewStr: params.view_str?params.view_str:null,
         label: params.label,
         index: parseInt(params.index),
-        subIndex: params.sub_index?parseInt(params.sub_index):null
+        subIndex: params.sub_index?parseInt(params.sub_index):null,
+        search: params.search
       };
   
       const targetView = await this.routeRequest(eventData);

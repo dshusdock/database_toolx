@@ -44,6 +44,7 @@ export const enum APP_STATE {
 
 export const enum APP_EVENTS {
   EV_CLICK,
+  SEARCH
 
 }
 
@@ -71,7 +72,8 @@ export type EVENT_DATA = {
   viewStr?: string,
   label?: string,
   index?: number,
-  subIndex?: number
+  subIndex?: number,
+  search?: string
 }
 
 export const UNIGY_SQL_STRINGS = [

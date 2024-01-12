@@ -1,8 +1,32 @@
 <div id="table1" class="">
-  <h3>
-    {{appData.view.2.data.0.tableName}}
-  </h3>
-  <table class="table mt-5 border">
+  <div class="d-flex flex-row justify-content-between mt-2">
+    <h3>
+      {{appData.view.2.data.0.tableName}}
+    </h3>
+    <div class="d-flex flex-row w-25">
+      <h4 class="mt-1 me-2">
+        Search
+      </h4>
+      <input
+        id="myinput"
+        class="form-control"
+        type="search"
+        name="search"
+        value="{{appData.view.2.data.5.searchInputValue}}"
+        placeholder="Begin Typing To Search Users..."
+        hx-post="/element/event/search/"
+        hx-trigger="input changed delay:500ms, search"
+        hx-target="#table1"
+        hx-swap="#myinput"
+        hx-indicator=".htmx-indicator"
+        hx-vals='{
+        "view_id": "2", 
+        "view_str": "table"}'
+      />
+    </div>
+  </div>
+
+  <table class="table mt-2 border">
     <thead>
       <tr>
         {{#each appData.view.2.data.1.hdr}}
@@ -24,6 +48,7 @@
       {{/each}}
     </tbody>
   </table>
+
   <div class="d-flex flex-row">
     <button
       style="width: 5em;"

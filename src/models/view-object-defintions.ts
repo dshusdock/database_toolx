@@ -51,7 +51,8 @@ export const view_object_definitions: VIEW_DATA[] = [
       { hdr: [] },
       { row: [] },
       { rowCount: 10, size: 0, start: 0, ptr: 0 },
-      { query: ""}
+      { query: ""},
+      {searchInputValue: ""}
     ],
     query: "",
   },
