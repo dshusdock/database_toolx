@@ -64,13 +64,22 @@ export class MainController {
 
   ///////////////with Query//////////////////
   @Get('/element/event/click/')
-   async handleElementClickEventQuery(@Query() params: any, @Res() res: Response) {
+   async handleElementClickEventGet(@Query() params: any, @Res() res: Response) {
 
     this.logger.log(`Path: 4[/element/event/click/] params = ${JSON.stringify(params)} `);
 
     const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
     return res.render(targetView, { appData });
   }
+
+  @Post('/element/event/click/')
+  async handleElementClickEventPost(@Query() params: any, @Res() res: Response) {
+
+   this.logger.log(`Path: 4[/element/event/click/] params = ${JSON.stringify(params)} `);
+
+   const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
+   return res.render(targetView, { appData });
+ }
 
   @Post('/element/event/search/')
   async handleTableSearch(@Body() params: any, @Res() res: Response) {
