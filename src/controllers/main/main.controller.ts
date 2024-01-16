@@ -4,6 +4,9 @@ import { Response } from 'express';
 import { AppLogger } from "src/utils/logger/app-logger";
 import { APP_EVENTS, RENDER_DATA } from "src/models/constants";
 
+// Note: do we want to use a cache manager like node-cache
+// or memcached
+
 
 @Controller("")
 export class MainController {
