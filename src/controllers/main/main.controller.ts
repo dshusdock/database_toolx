@@ -76,9 +76,9 @@ export class MainController {
   }
 
   @Post('/element/event/click/')
-  async handleElementClickEventPost(@Query() params: any, @Res() res: Response) {
+  async handleElementClickEventPost(@Body() params: any, @Res() res: Response) {
 
-   this.logger.log(`Path: 4[/element/event/click/] params = ${JSON.stringify(params)} `);
+   this.logger.log(`[POST]: 4[/element/event/click/] params = ${JSON.stringify(params)} `);
 
    const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.EV_CLICK, params);
    return res.render(targetView, { appData });
@@ -89,7 +89,7 @@ export class MainController {
    
    this.logger.log(`Path: [/element/event/search/] body = ${JSON.stringify(params)} `);
 
-   const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.SEARCH, params);
+   const { targetView, appData } =  await this.mainSvc.processEvent(APP_EVENTS.INPUT_CHANGED, params);
    console.log("B")
 
    return res.render(targetView, { appData });

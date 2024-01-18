@@ -9,6 +9,7 @@ import { MysqlService } from "../../services/mysql/mysql.service";
 import { VIEW_ID } from "src/models/view-object-defintions";
 import { AppLogger } from "src/utils/logger/app-logger";
 import { TABLE_BUTTON_LABEL } from "src/models/button-data";
+import { BTN_SQL_QUERIES_MAP } from "src/services/sql-query-manager/sql-queries";
 
 @Injectable()
 export class TableViewManager {
@@ -27,11 +28,11 @@ export class TableViewManager {
     try {
       switch (eventData.event) {
         case APP_EVENTS.EV_CLICK: {
-          await this.btnHandlerNavigate(eventData);
+          await this.clickHandler(eventData);
           break;
         }
-        case APP_EVENTS.SEARCH: {
-          await this.tableSearchHandler(eventData.search);
+        case APP_EVENTS.INPUT_CHANGED: {
+          await this.inputChangedHandler(eventData.search);
           break;
         }
       }
@@ -41,22 +42,25 @@ export class TableViewManager {
     return this.targetView;
   }
 
-  async btnHandlerNavigate(data) {
-    this.logger.log(`Entering btnHandlerNavigate `);
-
-    switch (data.label) {
-      case TABLE_BUTTON_LABEL.NEXT: {
-        await this.displayNextRows();
-        break;
-      }
-      case TABLE_BUTTON_LABEL.PREVIOUS: {
-        await this.displayPreviousRows();
-        break;
+  async clickHandler(data) {
+    this.logger.log(`Entering clickHandler `);
+    if (data.type === "up_arrow" || data.type === "down_arrow") {
+      this.processColumnSort(data)
+    } else {
+      switch (data.label) {
+        case TABLE_BUTTON_LABEL.NEXT: {
+          await this.displayNextRows();
+          break;
+        }
+        case TABLE_BUTTON_LABEL.PREVIOUS: {
+          await this.displayPreviousRows();
+          break;
+        }
       }
     }
   }
 
-  async tableSearchHandler(searchStr: string) {
+  async inputChangedHandler(searchStr: string) {
     this.logger.log(`Entering tableSearchHandler `);
     let row: string[] = [];
     let newData: any[] = [];
@@ -140,6 +144,26 @@ export class TableViewManager {
       this.appData.view[2].data[2].row = rows.slice(start, end);
       this.appData.view[2].data[1].hdr = [...obj.header];
       this.appData.view[2].data[0].tableName = obj.type;
+      resolve();
+    });
+  };
+
+  processColumnSort = async (data: EVENT_DATA): Promise<void> => {
+    this.logger.log(`Entering processColumnSort `);
+    return new Promise(async (resolve, reject) => {
+      let index = 0;
+      let result = data.label.split('-');
+    
+      BTN_SQL_QUERIES_MAP.forEach(el => {
+        if (el.type === result[0]) {
+          index = el.header.indexOf(result[1]);
+        }
+      });
+
+     // Run sql to get the table
+     // Sort the table by the appropriate column
+     // Assign result to view object
+
       resolve();
     });
   };

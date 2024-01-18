@@ -44,7 +44,7 @@ export const enum APP_STATE {
 
 export const enum APP_EVENTS {
   EV_CLICK,
-  SEARCH
+  INPUT_CHANGED
 
 }
 
@@ -73,7 +73,8 @@ export type EVENT_DATA = {
   label?: string,
   index?: number,
   subIndex?: number,
-  search?: string
+  search?: string,
+  type?: string
 }
 
 export const UNIGY_SQL_STRINGS = [
@@ -85,5 +86,6 @@ export type BTN_SQL_QUERIES_MAP_DEF = {
   type: SYSTEM_SUB_BUTTON_LABEL | USER_SUB_BUTTON_LABEL | RECORDING_SUB_BUTTON_LABEL |
   BUTTON_SUB_BUTTON_LABEL ,
   sqlStr: string,
-  header: string[]
+  header: string[],
+  sortable?: boolean
 }
