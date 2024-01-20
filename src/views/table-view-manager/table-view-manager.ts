@@ -45,7 +45,7 @@ export class TableViewManager {
   async clickHandler(data) {
     this.logger.log(`Entering clickHandler `);
     if (data.type === "up_arrow" || data.type === "down_arrow") {
-      this.processColumnSort(data)
+      await this.processColumnSort(data);
     } else {
       switch (data.label) {
         case TABLE_BUTTON_LABEL.NEXT: {
@@ -65,26 +65,33 @@ export class TableViewManager {
     let row: string[] = [];
     let newData: any[] = [];
     this.appData.view[VIEW_ID.VW_TABLE].data[5].searchInputValue = searchStr;
-    
+
     let rows = await this.mysqlSvc.query(
-    this.appData.view[VIEW_ID.VW_TABLE].data[4].query);
+      this.appData.view[VIEW_ID.VW_TABLE].data[4].query,
+    );
     for (let x = 0; x < rows.length; x++) {
       let rowCaptured = false;
       for (const key in rows[x]) {
         let str: string = rows[x][key];
-        if (str === null) { continue }
-        if (str.toString().toLowerCase().includes(searchStr.toString().toLowerCase())) {
-          
+        if (str === null) {
+          continue;
+        }
+        if (
+          str
+            .toString()
+            .toLowerCase()
+            .includes(searchStr.toString().toLowerCase())
+        ) {
           if (!rowCaptured) {
             newData.push(rows[x]);
             rowCaptured = true;
-          }   
-          console.log("Pushing Row  " + JSON.stringify(rows[x]))       
+          }
+          console.log("Pushing Row  " + JSON.stringify(rows[x]));
         }
       }
     }
     this.appData.view[VIEW_ID.VW_TABLE].data[2].row = [...newData];
-    console.log("A")
+    console.log("A");
     return;
   }
 
@@ -151,18 +158,66 @@ export class TableViewManager {
   processColumnSort = async (data: EVENT_DATA): Promise<void> => {
     this.logger.log(`Entering processColumnSort `);
     return new Promise(async (resolve, reject) => {
-      let index = 0;
-      let result = data.label.split('-');
-    
-      BTN_SQL_QUERIES_MAP.forEach(el => {
-        if (el.type === result[0]) {
-          index = el.header.indexOf(result[1]);
+      const start = this.appData.view[VIEW_ID.VW_TABLE].data[3].start;
+      const end =
+        this.appData.view[VIEW_ID.VW_TABLE].data[3].start +
+        this.appData.view[VIEW_ID.VW_TABLE].data[3].rowCount;
+
+      let sortIndex = 0;
+      let tableIndex = 0;
+      // table name and column label (header) provided in same field from
+      // request
+      let [tableName, header] = data.label.split("-");
+      let newAry = [];
+      let swap = 0;
+      let loopStart = 1;
+
+      // get the table index and the header index (sort index) based on the label
+      BTN_SQL_QUERIES_MAP.forEach((hdr, idx) => {
+        if (hdr.type === tableName) {
+          tableIndex = idx;
+          sortIndex = hdr.header.indexOf(header);
         }
       });
+     
+      let sqlResults = await this.mysqlSvc.query(
+        BTN_SQL_QUERIES_MAP[tableIndex].sqlStr,
+      );
 
-     // Run sql to get the table
-     // Sort the table by the appropriate column
-     // Assign result to view object
+      let working = [...sqlResults];
+
+      while ((swap>0) || loopStart) {
+        swap=0;
+ 
+        for (let x = 0; x < working.length; x++) {
+          if (x + 1 === working.length) {
+            loopStart=0;
+            newAry.push(working[x]);
+            break;
+          }
+          let key1 = Object.values(working[x]);
+          let key2 = Object.values(working[x + 1]);
+
+          if (key1[sortIndex] > key2[sortIndex] ) {
+            let tmp = working[x];
+            working[x] = working[x+1];
+            working[x+1] = tmp; 
+            newAry.push(working[x]);
+            swap++;            
+          } else {
+            newAry.push(working[x]);
+          }
+        }
+        console.log("--------------------------------")
+
+        working = [];
+        working = [...newAry];
+        newAry = [];
+
+      }
+
+      console.log(working)
+      this.appData.view[2].data[2].row = working.slice(start, end);
 
       resolve();
     });
