@@ -12,10 +12,10 @@ export class MysqlService {
 
   async createConnection() {
     this.connection = await mysql.createConnection({
-      host: "10.205.183.11",
+      host: "10.204.166.227",
       user: "dunkin",
       password: "dunkin123",
-      database : 'Citi1006'
+      database : 'ice_sep15'
     });
   }
 
